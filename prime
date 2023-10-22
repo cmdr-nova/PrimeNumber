@@ -1,0 +1,60 @@
+using System;
+
+class Program
+{
+    // A method that returns true if n is prime, false otherwise
+    static bool IsPrime(int n)
+    {
+        // If n is less than 2, it is not prime
+        if (n < 2)
+        {
+            return false;
+        }
+
+        // If n is 2, it is prime
+        if (n == 2)
+        {
+            return true;
+        }
+
+        // If n is even, it is not prime
+        if (n % 2 == 0)
+        {
+            return false;
+        }
+
+        // Iterate from 3 to the square root of n, with a step of 2
+        for (int i = 3; i * i <= n; i += 2)
+        {
+            // If i divides n evenly, n is not prime
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+
+        // If none of the above conditions are met, n is prime
+        return true;
+    }
+
+    static void Main(string[] args)
+    {
+        // Ask the user to enter a number
+        Console.Write("Enter a number: ");
+        
+        // Try to parse the input as an integer
+        int num;
+        bool success = int.TryParse(Console.ReadLine(), out num);
+
+        // If the input is not a valid integer, display an error message
+        if (!success)
+        {
+            Console.WriteLine("Invalid input.");
+            return;
+        }
+
+        // Call the IsPrime method and display the result
+        bool result = IsPrime(num);
+        Console.WriteLine($"{num} is {(result ? "prime" : "not prime")}.");
+    }
+}
